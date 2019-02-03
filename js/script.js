@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', function () {
     input.addEventListener('keypress', function (event) { //валидация ввода
         var chr = getChar(event); //получаем введенный символ
         if (chr == null) return; //если получаем null, то завершаем событие
-        if (chr < '0' || chr > '9') { //если 
+        if (chr < '0' || chr > '9') { //если не цифры
             event.preventDefault();
         }
     });
