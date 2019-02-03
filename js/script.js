@@ -2,17 +2,20 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let btn = document.getElementsByTagName('BUTTON'),
         input = document.getElementById('input'),
-        select = document.getElementById('color');
+        select = document.getElementById('color'),
+        row = document.getElementsByClassName('row')[0], //родитель items, для дилегирования и добавления 
+        items = document.getElementsByClassName('item'); //псевдомассив блоков;
 
-    btn[0].addEventListener('click', function () { //показать/скрыть форму выбора цвета
+    //показать/скрыть форму выбора цвета
+    btn[0].addEventListener('click', function () { 
         select.classList.toggle('show');
     });
-    btn[1].addEventListener('click', function () { //показать форму ввода количества блоков
+    //показать форму ввода количества блоков
+    btn[1].addEventListener('click', function () { 
         input.classList.add('show');
     });
-
-
-    input.addEventListener('contextmenu', function (event) { //отмена вызова контекстного меню в input
+    //отмена вызова контекстного меню в input
+    input.addEventListener('contextmenu', function (event) { 
         if (event) {
             event.preventDefault();
         }
@@ -30,8 +33,8 @@ window.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
         }
     });
-
-    function getChar(event) { //преобразование кода символа в сам символ
+    //преобразование кода символа в сам символ
+    function getChar(event) { 
         if (event.which == null) { //если браузер не поддерживает метод which *
             if (event.keyCode < 32) { //запрещаем ввод недопустимых символов 
                 event.preventDefault();
@@ -48,38 +51,34 @@ window.addEventListener('DOMContentLoaded', function () {
 
         return null; // специальная клавиша
     }
-
-    let row = document.getElementsByClassName('row')[0]; //родитель item, для дилегирования и добавления 
-
-    input.addEventListener('keydown', function (event) {
-        let item = document.getElementsByClassName('item'); //псевдомассив блоков
-
-        function createBlock(n) { //добавляем  n блоков
-            for (let i = 0; i < n; i++) { //let i = length; i < n + length; i++
-                let newBlock = document.createElement('div');
-                newBlock.classList.add('item');
-                row.appendChild(newBlock);
-            }
+    //добавляем  n блоков 
+    function createBlock(n) { 
+        for (let i = 0; i < n; i++) { //let i = length; i < n + length; i++
+            let newBlock = document.createElement('div');
+            newBlock.classList.add('item');
+            row.appendChild(newBlock);
         }
-
-        function removeBlock(n) { // удаляем n блоков
-            for (let i = 0; i < n; i++) {
-                let lastBlock = item[item.length - 1]; //выбираем последний блок в текущей итерации 
-                lastBlock.remove(); //и удаляем
-            }
+    }
+    //удаляем n блоков
+    function removeBlock(n) { 
+        for (let i = 0; i < n; i++) {
+            let lastBlock = items[items.length - 1]; //выбираем последний блок в текущей итерации 
+            lastBlock.remove(); //и удаляем
         }
-
+    }
+    //добавление/удаление
+    input.addEventListener('keydown', function (event) {     
         if (event.keyCode == 13) { //нажатие на Enter
-            let length = item.length; //текущее количество блоков 
+            let length = items.length; //текущее количество блоков 
             if (length < input.value) { //если текущее количество меньше введенного значения
-                createBlock(input.value - length); //добавляем блоки в количестве разности 
+                createBlock(input.value - length); //добавляем блоки
             } else {                               //если текущее количество больше введенного значения
-                removeBlock(length - input.value); //удаляем блоки в количестве разности 
+                removeBlock(length - input.value); //удаляем блоки
             }
         }
     });
-
-    row.addEventListener('click', function (event) { //закрашивание
+    //закрашивание
+    row.addEventListener('click', function (event) { 
         let target = event.target,
             currentColor = select.value; //текущий цвет
         if (target.classList.contains('item') && select.classList.contains('show') && currentColor != 'empty') {
