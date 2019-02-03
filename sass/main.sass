@@ -1,0 +1,99 @@
+*
+ box-sizing: border-box
+ outline: none
+
+input
+ display: none
+ position: absolute
+ bottom: -10px
+ width: 50px
+
+select  
+ display: none
+ position: absolute
+ bottom: -10px
+ width: 120px
+ 
+.wrap
+ max-width: 1280px
+ height: 100vh
+ margin-left: auto
+ margin-right: auto
+.row
+ display: flex
+ flex-wrap: wrap
+ width: 100%
+ margin-top: 20px
+
+.button
+ width: 200px
+ height: 50px
+ margin: 15px
+ border: none
+ border-radius: 5px
+ background: #008080
+ cursor: pointer
+ font-size: 16px
+ color: #ffffff
+ &:hover
+  background: lighten(#008080, 4)
+ &-block 
+  display: flex
+  justify-content: center
+  align-items: center
+  &__color
+   position: relative
+   display: flex
+   flex-direction: column
+   justify-content: center
+   align-items: center
+  &__quantity
+   position: relative
+   display: flex
+   flex-direction: column
+   justify-content: center
+   align-items: center
+
+.item
+ width: calc(100%/8 - 20px)
+ height: 100px
+ margin: 10px
+ background: darkgray 
+
+ &:first-child:nth-last-child(1) 
+  width: 100%
+
+ &:first-child:nth-last-child(2),
+ &:first-child:nth-last-child(2) ~ .item 
+  width: calc(50% - 20px)
+
+ &:first-child:nth-last-child(3),
+ &:first-child:nth-last-child(3) ~ .item 
+  width: calc(100%/3 - 20px)
+
+ &:first-child:nth-last-child(4),
+ &:first-child:nth-last-child(4) ~ .item 
+  width: calc(100%/4 - 20px)
+
+ &:first-child:nth-last-child(5),
+ &:first-child:nth-last-child(5) ~ .item 
+  width: calc(100%/5 - 20px)
+
+ &:first-child:nth-last-child(6),
+ &:first-child:nth-last-child(6) ~ .item 
+  width: calc(100%/6 - 20px)
+
+ &:first-child:nth-last-child(7),
+ &:first-child:nth-last-child(7) ~ .item 
+  width: calc(100%/7 - 20px)
+
+.show
+ display: block
+
+
+
+
+
+
+ 
+
